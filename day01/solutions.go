@@ -8,15 +8,16 @@ import (
 	"strings"
 )
 
+var leftArr, rightArr []int
+
 func Solve() (int, int) {
 	return solvePart1(), solvePart2()
 }
 
 func solvePart1() int {
-	var leftArr, rightArr []int
 	var sum int
 
-	file, err := os.Open("day01/input_part1.txt")
+	file, err := os.Open("day01/input.txt")
 	if err != nil {
 		panic(err)
 	}
@@ -43,5 +44,15 @@ func solvePart1() int {
 }
 
 func solvePart2() int {
-	return 1
+	sum := 0
+	for i := range len(leftArr) {
+		freq := 0
+		for j := range len(rightArr) {
+			if leftArr[i] == rightArr[j] {
+				freq++
+			}
+		}
+		sum += leftArr[i] * freq
+	}
+	return sum
 }
